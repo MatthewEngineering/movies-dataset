@@ -29,9 +29,33 @@ def fetch():
     cursor.execute(sql)
     rows = cursor.fetchall()
 
-    st.text(rows[0][1])
+    st.text(rows)#[0][1])
 
     conn.close()
+
+
+def insert(name, age=100): 
+    import sqlite3
+
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+
+    cursor.execute(f'''
+        INSERT INTO users (name, age)
+        VALUES ('{name}', {age})
+    ''')
+    conn.commit()
+
+    # Step 5: Query the data
+    # cursor.execute('SELECT * FROM users;')
+    rows = cursor.fetchall()
+
+    conn.close()
+
+value = st.text_input("Enter inserting user name: ")
+
+if st.button("Insert Name"): 
+    insert(value)
 
 fetch()
 
