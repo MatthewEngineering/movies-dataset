@@ -1,0 +1,13 @@
+def fetch():
+    import sqlite3
+
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+
+    # Step 5: Query the data
+    cursor.execute('SELECT * FROM users;')
+    rows = cursor.fetchall()
+
+    print(rows[0][1])
+
+    conn.close()

@@ -15,6 +15,25 @@ st.write(
 )
 
 st.text("helloworld")
+def fetch():
+    import sqlite3
+
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+
+    id = st.number_input("Enter user ID: ")
+    sql = f'SELECT * FROM users ' + (f' WHERE id = {str(int(id))}' if id in [1,2,3] else '')
+    print(sql)
+
+    # Step 5: Query the data
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+
+    st.text(rows[0][1])
+
+    conn.close()
+
+fetch()
 
 # Load the data from a CSV. We're caching this so it doesn't reload every time the app
 # reruns (e.g. if the user interacts with the widgets).
