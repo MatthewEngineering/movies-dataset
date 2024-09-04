@@ -52,6 +52,9 @@ def insert(name, age=100):
 
     conn.close()
 
+conn = st.connection("sql")
+st.text(conn.is_healthy())
+
 value = st.text_input("Enter inserting user name: ")
 
 if st.button("Insert Name"): 
